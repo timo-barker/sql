@@ -55,9 +55,9 @@ USING (
       ) AS src
 ON (tgt.CustomerKey = src.CustomerKey)  
 WHEN MATCHED
-    AND (   tgt.CustomerName <> src.CustomerName
-         OR tgt.Planet       <> src.Planet
-         OR tgt.Affiliation  <> src.Affiliation)
+    AND EXISTS (SELECT tgt.CustomerName, tgt.Planet, tgt.Affiliation
+                EXCEPT
+                SELECT src.CustomerName, src.Planet, src.Affiliation)
 THEN
     UPDATE SET
         tgt.CustomerName = src.CustomerName
