@@ -1,0 +1,24 @@
+DECLARE @R INT = (ABS(CHECKSUM(NEWID()))%10)+1
+DECLARE @X INT;
+DECLARE #C CURSOR FOR
+    WITH cte_smites AS
+       (
+        SELECT 1 AS S
+        UNION ALL
+        SELECT S + 1
+        FROM cte_smites
+        WHERE S < @R
+       )
+    SELECT S
+    FROM cte_smites
+    ORDER BY S
+    OPTION (MAXRECURSION 10);
+OPEN #C;
+FETCH NEXT FROM #C INTO @X;
+WHILE @@FETCH_STATUS = 0
+BEGIN
+    PRINT 'foo';
+    FETCH NEXT FROM #C INTO @X;
+END;
+CLOSE #C;
+DEALLOCATE #C;
