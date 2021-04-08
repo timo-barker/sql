@@ -19,15 +19,17 @@ SELECT @i;
 
 -----------------------------
 
-DECLARE @Error INT;
-
-BEGIN TRAN
-    SET @i = 10000000000;
-    SET @Error = @@ERROR;
-    IF @Error <> 0
-        GOTO ErrorHandler;
-COMMIT TRAN;
-
+DECLARE @e INT;
+BEGIN TRAN x1;
+    SELECT 1/ROUND(RAND(),0);
+        SET @e = @@ERROR;
+        IF @e <> 0
+            GOTO ErrorHandler;
+COMMIT TRAN x1;
+RAISERROR(N'👍',0,0);
 ErrorHandler:
-IF @Error <> 0
-    ROLLBACK TRAN;
+IF @@TRANCOUNT > 0
+    BEGIN
+        ROLLBACK TRAN x1;
+        PRINT N'oh 💩! try again.';
+    END;
