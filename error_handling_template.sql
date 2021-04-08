@@ -27,6 +27,7 @@ BEGIN TRAN x1;
             GOTO ErrorHandler;
 COMMIT TRAN x1;
 RAISERROR(N'👍',0,0);
+
 ErrorHandler:
 IF @@TRANCOUNT > 0
     BEGIN
