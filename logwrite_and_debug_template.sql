@@ -44,7 +44,7 @@ GO
 --------------------------------------------------------------------------------
 --
 -- Author:      Anno Domini
--- Create date: 1970-01-01
+-- Create Date: 1970-01-01
 --
 -- Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
 --              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
