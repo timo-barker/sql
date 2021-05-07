@@ -2,7 +2,7 @@
 --;
 use AdventureWorks
 ;
-declare @table varchar(128) = 'HumanResources.Employee'
+declare @table varchar(128) = 'Production.Product'
 ;
 if object_id ('tempdb.dbo.#output','U') is not null
     drop table #output
