@@ -148,7 +148,7 @@ IF @DeBug = 1
 --------------------------------------------------------------------------------
 
 ------------------ This goes at start of each block of logic -------------------
-SET @BlockName = '2     - Secundus ';
+SET @BlockName = '2     - Secundus';
 SET @BlockBegin = GETDATE();
 IF @LogWrite = 1
     INSERT INTO ##LogStatsDetailed (ProcName, ProcBegin, BlockName, BlockBegin
