@@ -27,12 +27,10 @@ SELECT DISTINCT Col1 COLLATE Latin1_General_CI_AS AS Col1 FROM @Test ORDER BY Co
 -- 'æ' = 'ae' and 'ß' = 'ss'. Allows for character expansion.
 
 SELECT DISTINCT Col1 COLLATE SQL_Latin1_General_CP1_CS_AS AS Col1 FROM @Test ORDER BY Col1;
--- "String Sort" puts all punctuation ahead of letters. Case sensitive.
--- 'æ' <> 'ae' and 'ß' <> 'ss'. Does not allow character expansion.
+-- Case sensitive.
 
 SELECT DISTINCT Col1 COLLATE SQL_Latin1_General_CP1_CI_AI AS Col1 FROM @Test ORDER BY Col1;
--- "String Sort" puts all punctuation ahead of letters. Accent insensitive
--- 'æ' <> 'ae' and 'ß' <> 'ss'. Does not allow character expansion.
+-- Accent insensitive
 
 SELECT SERVERPROPERTY('collation');  
 
