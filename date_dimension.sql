@@ -57,5 +57,8 @@ SELECT
                                  END) OVER(PARTITION BY DATEPART(YEAR,DATEADD(SECOND,ID/1000,'19700101'))
                                                        ,DATEPART(MONTH,DATEADD(SECOND,ID/1000,'19700101'))
                                            ORDER BY ID ASC)
+   ,CalendarYear = DATEPART(YEAR,DATEADD(SECOND,ID/1000,'19700101'))
+   ,CalendarMonth = DATEPART(MONTH,DATEADD(SECOND,ID/1000,'19700101'))
+   ,CalendarQuarter = DATEPART(QUARTER,DATEADD(SECOND,ID/1000,'19700101'))
 FROM cte_dDate
 OPTION (MAXRECURSION 24856);
