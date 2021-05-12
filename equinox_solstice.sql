@@ -1,3 +1,4 @@
+-- sauce: https://stellafane.org/misc/equinox.html
 DECLARE @year FLOAT
 DECLARE @y FLOAT, @i TINYINT, @k TINYINT
        ,@jde0 FLOAT, @t FLOAT, @w FLOAT
