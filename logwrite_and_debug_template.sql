@@ -27,6 +27,7 @@ CREATE TABLE ##LogStatsDetailed
    ,RowCnt       INT
    ,Err_Num      INT
    ,Err_Severity INT
+   ,Err_State    INT
    ,Err_Line     INT
    ,Err_Msg      VARCHAR(8000)
    ,UserMsg1     VARCHAR(8000)
@@ -209,6 +210,7 @@ IF @LogWrite = 1
     SET    BlockEnd = @ProcEnd
           ,Err_Num = ERROR_NUMBER()
           ,Err_Severity = ERROR_SEVERITY()
+          ,Err_State = ERROR_STATE()
           ,Err_Line = ERROR_LINE()
           ,Err_Msg = ERROR_MESSAGE()
     WHERE  ProcName = @ProcName
