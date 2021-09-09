@@ -1,5 +1,4 @@
 DROP TABLE IF EXISTS #TableA;
-DROP TABLE IF EXISTS #TableB;
 
 CREATE TABLE #TableA
   (
@@ -7,19 +6,9 @@ CREATE TABLE #TableA
    ,Value INT
   );
 
-CREATE TABLE #TableB
-  (
-    ID    INT
-   ,Value INT
-  );
-
 INSERT INTO #TableA (Value)
 OUTPUT inserted.*
 VALUES (1),(2),(3),(4),(5),(5),(3),(5);
-
-INSERT INTO #TableB (ID,Value)
-OUTPUT inserted.*
-VALUES (1,1),(2,2),(3,3),(4,4),(5,5),(5,5),(3,3),(5,5);
 
 
 -- METHOD 1
@@ -154,18 +143,39 @@ WHERE ID NOT IN (
 
 -- METHOD 7
 
-TRUNCATE TABLE #TableB;
+TRUNCATE TABLE #TableA;
 
-INSERT INTO #TableB (ID,Value)
-VALUES (1,1),(2,2),(3,3),(4,4),(5,5),(5,5),(3,3),(5,5);
+INSERT INTO #TableA (Value)
+VALUES (1),(2),(3),(4),(5),(5),(3),(5);
 
-WITH b (ID, Value, row) AS
+WITH b (Value, row) AS
   (
-   SELECT ID, Value, ROW_NUMBER() OVER(PARTITION BY ID, Value
-                                       ORDER BY ID, Value)
-   FROM #TableB
+   SELECT Value, ROW_NUMBER() OVER(PARTITION BY Value
+                                   ORDER BY (SELECT NULL))
+   FROM #TableA
   )
 DELETE
 FROM b
-OUTPUT deleted.ID, deleted.Value
+OUTPUT deleted.*
 WHERE b.row > 1;
+
+
+-- METHOD 8
+
+TRUNCATE TABLE #TableA;
+
+INSERT INTO #TableA (Value)
+VALUES (1),(2),(3),(4),(5),(5),(3),(5);
+
+WITH b (Value, row) AS
+  (
+   SELECT Value, MAX(%%lockres%%)
+   FROM #TableA
+   GROUP BY Value
+  )
+DELETE a
+OUTPUT deleted.*
+FROM #TableA a
+INNER JOIN b
+ON a.Value = b.Value
+WHERE a.%%lockres%% <> b.row;
