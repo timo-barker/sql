@@ -73,7 +73,7 @@ WHERE ID < (
             SELECT MAX(ID)
             FROM #TableA b
             WHERE a.Value = b.Value
-            GROUP BY Value
+            GROUP BY b.Value
             HAVING COUNT(*) > 1
            );
 
