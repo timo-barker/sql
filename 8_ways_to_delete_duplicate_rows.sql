@@ -20,21 +20,22 @@ VALUES (1),(2),(3),(4),(5),(5),(3),(5);
 
 
 WITH b AS
+WITH b (ID, Value) AS
   (
    SELECT ID, (
                SELECT MAX(Value)
                FROM #TableA i
                WHERE o.Value = i.Value
-               GROUP BY Value
+               GROUP BY i.Value
                HAVING o.ID = MAX(i.ID)
-              ) AS MaxValue
+              )
    FROM #TableA o
   )
 DELETE a
 OUTPUT deleted.*
 FROM #TableA a, b
 WHERE a.ID = b.ID
-AND b.MaxValue IS NULL;
+AND b.Value IS NULL;
 
 
 -- METHOD 2
