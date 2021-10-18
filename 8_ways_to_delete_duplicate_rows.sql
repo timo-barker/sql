@@ -85,10 +85,10 @@ TRUNCATE TABLE #TableA;
 INSERT INTO #TableA (Value)
 VALUES (1),(2),(3),(4),(5),(5),(3),(5);
 
-WITH b AS
+WITH b (ID, Rnk) AS
   (
    SELECT ID, RANK() OVER(PARTITION BY Value
-                          ORDER BY ID DESC) AS rnk
+                          ORDER BY ID DESC)
    FROM #TableA
   )
 DELETE a
