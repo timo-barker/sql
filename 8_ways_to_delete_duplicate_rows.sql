@@ -19,7 +19,6 @@ INSERT INTO #TableA (Value)
 VALUES (1),(2),(3),(4),(5),(5),(3),(5);
 
 
-WITH b AS
 WITH b (ID, Value) AS
   (
    SELECT ID, (
@@ -45,9 +44,9 @@ TRUNCATE TABLE #TableA;
 INSERT INTO #TableA (Value)
 VALUES (1),(2),(3),(4),(5),(5),(3),(5);
 
-WITH b AS
+WITH b (ID, Value) AS
   (
-   SELECT MAX(ID) AS ID, Value
+   SELECT MAX(ID), Value
    FROM #TableA
    GROUP BY Value
    HAVING COUNT(Value) > 1
