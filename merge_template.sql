@@ -44,7 +44,7 @@ VALUES
  ,(4,'Boba Fett'       ,'Kamino'   ,'Mandalorian')
  ,(5,'Darth Vader'     ,'Coruscant','Sith'       );
 
-MERGE INTO @Customer AS tgt 
+MERGE INTO @Customer WITH (SERIALIZABLE) AS tgt 
 USING (
        SELECT 
            CustomerKey
