@@ -179,3 +179,35 @@ FROM #TableA a
 INNER JOIN b
 ON a.Value = b.Value
 WHERE a.%%lockres%% <> b.row;
+
+
+-- METHOD 9
+
+TRUNCATE TABLE #TableA;
+
+INSERT INTO #TableA (Value)
+VALUES (1),(2),(3),(4),(5),(5),(3),(5);
+
+WITH a AS
+  (
+   SELECT Value
+   FROM #TableA 
+  )
+,b (row, chk) AS
+  (
+   SELECT ROW_NUMBER() OVER(ORDER BY CHECKSUM(*))
+         ,CHECKSUM(*)
+    FROM a  
+  )
+,c (MaxRow) AS
+  (
+   SELECT MAX(row)
+   FROM b
+   GROUP BY chk
+  )
+DELETE b
+OUTPUT deleted.*
+WHERE b.row NOT IN (
+                    SELECT MaxRow
+                    FROM c
+                   );
