@@ -121,7 +121,7 @@ DELETE a
 OUTPUT deleted.*
 FROM #TableA a, b
 WHERE a.ID = b.ID
-AND b.MaxValue IS NOT NULL;
+AND b.Value IS NOT NULL;
 
 
 -- METHOD 6
