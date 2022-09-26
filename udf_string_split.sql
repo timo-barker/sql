@@ -22,5 +22,5 @@ BEGIN
             INSERT INTO @udf_LIST(ID) VALUES (@udf_OUTPUT);
         END;
     RETURN;
-EBD;
+END;
 GO
