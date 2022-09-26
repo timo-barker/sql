@@ -56,8 +56,8 @@ BEGIN TRY
     UPDATE dbo.CustomerCreditLimits
     SET CustomerId = i.CustomerId, 
         CreditLimit = i.CreditLimit,
-        UpdatedDateTime = sysdatetime(),
-        UpdatedBy = original_login()
+        UpdatedDateTime = DEFAULT,
+        UpdatedBy = DEFAULT
     FROM dbo.CustomerCreditLimits inner join inserted i on CustomerCreditLimits.CustomerId = i.CustomerId
 END TRY
 BEGIN CATCH
