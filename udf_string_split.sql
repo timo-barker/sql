@@ -1,9 +1,9 @@
 CREATE FUNCTION dbo.udf_string_split
   (
-    @udf_INPUT     nvarchar(4000);
-   ,@udf_DELIMETER nchar(1);  
+    @udf_INPUT     nvarchar(4000)
+   ,@udf_DELIMETER nchar(1)  
   )
-RETURN @udf_LIST TABLE
+RETURNS @udf_LIST TABLE
   (
     ID nvarchar(15)
   )
@@ -22,4 +22,5 @@ BEGIN
             INSERT INTO @udf_LIST(ID) VALUES (@udf_OUTPUT);
         END;
     RETURN;
+EBD;
 GO
