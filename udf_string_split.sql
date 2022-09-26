@@ -11,7 +11,7 @@ AS
 BEGIN
     -- Replica of the String_Split() function from SQL Server 2016 (compatability 130).
     -- For use in SQL Server 2014 (compatability 120) or older.
-    -- USe: select value dbo.udf_string_split('The,quick,brown,fox,jumps,over,the,lazy,dog.',',')
+    -- USe: select * from dbo.udf_string_split('The,quick,brown,fox,jumps,over,the,lazy,dog.',',')
     DECLARE @udf_OUTPUT nvarchar(20);
     DECLARE @udf_TRIMSPACE bit = 1;
     WHILE LEN(@udf_INPUT) > 0
