@@ -6,7 +6,7 @@ create table dbo.NoSelectStar (ColA int identity, ColB varchar(100), ColC dateti
 go
 
 create view dbo.TheView as (
-    select *, 1/0 as NoSelect
+    select ColA, ColB, ColC, 1/0 as NoSelect
     from dbo.NoSelectStar
 )
 go
