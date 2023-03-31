@@ -245,6 +245,7 @@ values
 ,('Pat','Thettick')
 ,('Patty','O''Furniture')
 ,('Peg','Legge')
+,('Pedasso','Stu')
 ,('Penny','Black')
 ,('Percy','Kewshun')
 ,('Percy','Vere')
